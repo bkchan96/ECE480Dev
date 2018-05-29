@@ -29,14 +29,14 @@ import cv2
 #
 
 params = cv2.SimpleBlobDetector_Params()
-params.minThreshold = 10
-params.maxThreshold = 200
-params.filterByArea = True
-params.minArea = 100
-params.maxArea = 200
+params.minThreshold = 10 #10
+params.maxThreshold = 200 #200
+params.filterByArea = True #True
+params.minArea = 90
+params.maxArea = 600
 params.filterByCircularity = True
 params.minCircularity = 0.1
-params.filterByConvexity = True
+params.filterByConvexity = False #True
 params.minConvexity = 0.87
 params.filterByInertia = True
 params.minInertiaRatio = 0.01
@@ -67,7 +67,7 @@ RGB = cv2.adaptiveThreshold(RGB, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BIN
 s = cv2.bitwise_xor(RGB1, RGB)
 cropped = cv2.resize(s, (1600, 900))
 cropped = cv2.bitwise_not(cropped)
-#cv2.imshow('res', cropped)
+cropped = cv2.GaussianBlur(cropped, (5,5), 1)
 detector = cv2.SimpleBlobDetector_create(params)
 akeypoints = detector.detect(cropped)
 answerkeypoints = cv2.drawKeypoints(cropped, akeypoints, np.array([]), (0, 0, 255),cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
