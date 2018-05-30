@@ -181,4 +181,10 @@ cv2.imshow('result', answerkeypoints)
 numberofincorrect = int(len(akeypoints)/2)
 print(numberofincorrect)
 
+#gui menu
+back = cv2.imread('image.jpg',1)
+back = cv2.resize(back, (450, 50))
+cv2.putText(back, "This Student has " + str(numberofincorrect) + " Errors",(10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (50,50,50), 2)
+cv2.imshow('Menu', back)
+
 cv2.waitKey(0)
